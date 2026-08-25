@@ -616,6 +616,47 @@
       font-size: 0.8rem;
     }
 
+    .site-footer { background: #07182e; padding: 56px 5% 0; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 40px;
+    }
+    .footer-logo { height: 34px; width: auto; margin-bottom: 14px; }
+    .footer-brand p { color: rgba(255,255,255,0.45); font-size: 0.85rem; line-height: 1.65; max-width: 260px; }
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: grid; gap: 11px; }
+    .footer-col a, .footer-col li {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+    .footer-col a:hover { color: var(--teal); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 22px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.3);
+      font-size: 0.78rem;
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+
     /* ── MODAL ── */
     .modal-overlay {
       display: none;
@@ -1118,9 +1159,45 @@
   </div>
 </section>
 
-<div class="footer-copy">
-  © 2025 MEDIRAYN SAC. Todos los derechos reservados.
-</div>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img class="footer-logo" src="assets/img/logo/medirayn-logo-horizontal-white.png" alt="MEDIRAYN">
+      <p>Auditamos descansos médicos para detectar y reducir el ausentismo injustificado en tu organización.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="servicios/auditoria-visita-domiciliaria.html">Auditoría y Visita Domiciliaria</a></li>
+        <li><a href="servicios/fisioterapia-in-company.html">Fisioterapia in Company</a></li>
+        <li><a href="servicios/masoterapia-in-company.html">Masoterapia in Company</a></li>
+        <li><a href="servicios/pausas-activas.html">Pausas Activas</a></li>
+        <li><a href="#solucion">Ver todos los servicios</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#problema">El problema</a></li>
+        <li><a href="#porque">Por qué MEDIRAYN</a></li>
+        <li><a href="#resultados">Resultados</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto MEDIRAYN</h4>
+      <ul>
+        <li><a href="mailto:medicomercial@medirayn.com">medicomercial@medirayn.com</a></li>
+        <li><a href="tel:+51991220142">Cel. +51 991 220 142</a></li>
+        <li>Perú</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 MEDIRAYN. Todos los derechos reservados.</span>
+    <span>Control de Ausentismo Laboral y Bienestar Corporativo</span>
+  </div>
+</footer>
 
 <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/51991220142?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20los%20servicios%20de%20MEDIRAYN" class="wa-float" target="_blank" rel="noopener" aria-label="Hablar por WhatsApp">
