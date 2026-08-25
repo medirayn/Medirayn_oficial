@@ -1210,7 +1210,7 @@
     <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
     <h2 id="modalTitle">Solicitar evaluación gratuita</h2>
     <p class="modal-sub">Te contactamos en menos de 24 horas. Sin compromiso.</p>
-    <form id="contactForm" onsubmit="submitForm(event)">
+    <form id="contactForm" action="https://formspree.io/f/xrpzwlkq" method="POST" onsubmit="submitForm(event)">
       <div class="form-group">
         <label for="empresa">Nombre de la organización *</label>
         <input type="text" id="empresa" name="empresa" placeholder="Tu empresa o clínica" required />
@@ -1279,11 +1279,30 @@
 
   function submitForm(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('.btn-submit');
-    btn.innerHTML = '✓ Enviado — te contactamos pronto';
-    btn.style.background = '#0d9e6e';
+    const form = e.target;
+    const btn = form.querySelector('.btn-submit');
+    const originalHTML = btn.innerHTML;
     btn.disabled = true;
-    setTimeout(closeModal, 2500);
+    btn.innerHTML = 'Enviando...';
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        btn.innerHTML = '✓ Enviado — te contactamos pronto';
+        btn.style.background = '#0d9e6e';
+        setTimeout(closeModal, 2500);
+      } else {
+        btn.innerHTML = 'Hubo un error, intenta de nuevo';
+        btn.disabled = false;
+        setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
+      }
+    }).catch(() => {
+      btn.innerHTML = 'Hubo un error, intenta de nuevo';
+      btn.disabled = false;
+      setTimeout(() => { btn.innerHTML = originalHTML; }, 3000);
+    });
   }
 </script>
 </body>

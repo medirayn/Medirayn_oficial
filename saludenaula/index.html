@@ -1015,7 +1015,7 @@
         </div>
       </div>
       <div class="enroll-divider">o complete el formulario</div>
-      <form class="enroll-form" id="enrollForm">
+      <form class="enroll-form" id="enrollForm" action="https://formspree.io/f/xnpakzvz" method="POST">
         <div class="form-row">
           <div class="field">
             <label for="colegio">Nombre del colegio *</label>
@@ -1153,17 +1153,33 @@
     });
   });
 
-  // Formulario de inscripción
-  // NOTA: este envío es solo de interfaz. Para producción, conectar este
-  // formulario a un backend (por ejemplo, una tabla de Supabase como la que
-  // ya usa el portal principal, o un servicio de email transaccional) que
-  // reciba los datos de "enrollForm" y notifique al equipo comercial.
+  // Formulario de inscripción — envía los datos a Formspree (medicomercial@medirayn.com)
   const enrollForm = document.getElementById('enrollForm');
   const enrollSuccess = document.getElementById('enrollSuccess');
   enrollForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    enrollForm.style.display = 'none';
-    enrollSuccess.classList.add('show');
+    const submitBtn = enrollForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    fetch(enrollForm.action, {
+      method: 'POST',
+      body: new FormData(enrollForm),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        enrollForm.style.display = 'none';
+        enrollSuccess.classList.add('show');
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo o escríbenos directamente a medicomercial@medirayn.com.');
+      }
+    }).catch(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      alert('Hubo un error al enviar el formulario. Por favor intenta de nuevo o escríbenos directamente a medicomercial@medirayn.com.');
+    });
   });
 </script>
 
